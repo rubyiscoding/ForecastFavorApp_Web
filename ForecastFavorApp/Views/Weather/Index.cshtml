@@ -1,0 +1,42 @@
+@* Specify the model that this view expects, which is the CurrentWeatherResponse *@
+@model ForecastFavorLib.Models.CurrentWeatherResponse
+
+@{
+    ViewData["Title"] = "Current Weather";
+}
+@*Display the current weather heading, indicating the location as Sudbury *@
+<h2>Current Weather in Sudbury</h2>
+
+@* Start a division to contain the weather details *@
+<div>
+
+    <p><strong>Temperature:</strong> @Model.Current.TemperatureC °C (@Model.Current.TemperatureF °F)</p>
+    <p><strong>Condition:</strong> @(Model.Current.Condition?.Text ?? "Not available")</p>
+    <p><strong>Pressure:</strong> @Model.Current.PressureIn inches</p>
+    <p><strong>Humidity:</strong> @Model.Current.Humidity %</p>
+    <p><strong>Cloud Cover:</strong> @Model.Current.Cloud %</p>
+    <p><strong>Feels Like:</strong> @Model.Current.FeelsLikeC °C</p>
+    <p><strong>Wind Speed:</strong> @Model.Current.WindKph kph</p>
+</div>
+
+
+@* Button to allow the user to fetch the latest weather data *@
+<button id="fetchWeatherButton">Fetch Weather</button>
+
+@* JavaScript block to handle the click event on the Fetch Weather button *@
+<script>
+    document.getElementById("fetchWeatherButton").addEventListener("click", function () {
+        // Send a request to the Index action method
+        fetch("/Weather/Index")
+            .then(response => {
+                if (response.ok) {
+                    // Handle a successful response 
+                } else {
+                    // Handle error response
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching weather data:", error);
+            });
+    });
+</script>
