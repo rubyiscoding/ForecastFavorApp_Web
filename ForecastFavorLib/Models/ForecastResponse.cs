@@ -9,7 +9,7 @@ namespace ForecastFavorLib.Models
         public Location Location { get; set; }
 
         [JsonProperty("current")]
-        public CurrentWeather Current { get; set; }
+        public CurrentWeatherResponse Current { get; set; }
 
         [JsonProperty("forecast")]
         public Forecast Forecast { get; set; }
