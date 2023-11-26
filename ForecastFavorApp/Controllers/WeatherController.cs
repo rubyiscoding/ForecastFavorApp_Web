@@ -28,6 +28,25 @@ namespace ForecastFavorApp.Controllers
             return View(currentWeather);
         }
 
-        
+        public async Task<IActionResult> Tomorrow()
+        {
+            // Fetch the forecast for the next 2 days including today.
+            var forecast = await _weatherService.GetForecastAsync("Sudbury", 2);
+
+            // Select the forecast for tomorrow which should be the second element of the forecastday array.
+            var tomorrowForecast = forecast.Forecast.ForecastDay.ElementAtOrDefault(1);
+
+            // Check if tomorrow's forecast is available.
+            if (tomorrowForecast == null)
+            {
+                // Handle the case where tomorrow's forecast is not available.
+                return View("Error"); 
+            }
+
+            // Pass the forecast for tomorrow to the view.
+            return View(tomorrowForecast);
+        }
+
+
     }
 }
