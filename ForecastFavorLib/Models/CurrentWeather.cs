@@ -2,7 +2,16 @@ using Newtonsoft.Json;
 
 namespace ForecastFavorLib.Models
 {
-    public class CurrentWeather
+     public class CurrentWeatherResponse
+    {
+        [JsonProperty("location")]
+        public Location Location { get; set; }
+
+        [JsonProperty("current")]
+        public Current Current { get; set; }
+    }
+
+    public class Current
     {
         [JsonProperty("last_updated")]
         public string LastUpdated { get; set; }
@@ -27,7 +36,7 @@ namespace ForecastFavorLib.Models
         public int Cloud { get; set; }
 
         [JsonProperty("feelslike_c")]
-        public int FeelsLikeC { get; set; }
+        public double FeelsLikeC { get; set; }
         
         [JsonProperty("wind_kph")]
         public double WindKph { get; set; }
