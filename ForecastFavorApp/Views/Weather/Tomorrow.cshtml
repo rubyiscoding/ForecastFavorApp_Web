@@ -1,0 +1,33 @@
+@* Specify the model type this view *@
+@model ForecastFavorLib.Models.ForecastDay
+
+@{
+    // Set the page title to be used in the layout for the <title> tag
+    ViewData["Title"] = "Weather Forecast for Tomorrow";
+}
+@*Heading for the forecast of the next day*@
+<h2>Weather Forecast for Tomorrow</h2>
+
+@*Check if the Model and the Day properties are not null to avoid null reference exceptions*@
+@if (Model != null && Model.Day != null)
+{
+    // Begin a division to display the weather details
+    <div>
+        <p><strong>Max Temperature:</strong> @Model.Day.MaxTempC °C</p>
+        <p><strong>Min Temperature:</strong> @Model.Day.MinTempC °C</p>
+        <p><strong>Average Temperature:</strong> @Model.Day.AvgTempC °C</p>
+        <p><strong>Condition:</strong> @Model.Day.Condition.Text</p>
+        <p><strong>Max Wind Speed:</strong> @Model.Day.MaxWindKph kph</p>
+        <p><strong>Total Precipitation:</strong> @Model.Day.TotalPrecipIn inches</p>
+        <p><strong>Total Snow:</strong> @Model.Day.TotalSnowCm cm</p>
+        <p><strong>Average Humidity:</strong> @Model.Day.AvgHumidity %</p>
+        <p><strong>Chance of Rain:</strong> @Model.Day.DailyChanceOfRain %</p>
+        <p><strong>Chance of Snow:</strong> @Model.Day.DailyChanceOfSnow %</p>
+       
+    </div>
+}
+else
+{
+    // Display a message if the forecast data for tomorrow is unavailable
+    <p>Forecast data for tomorrow is not available at the moment.</p>
+}
