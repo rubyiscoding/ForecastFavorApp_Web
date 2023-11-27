@@ -13,8 +13,4 @@
 🤠 😸
 
 
-> [!TIP]
-> Work Hard Play Hard !!
-
-**I am just checking whether this fork thing will effect the original project or now. So sit back and CHILL**
 
