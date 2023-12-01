@@ -94,4 +94,49 @@ namespace ForecastFavorApp_UnitTest
         }
     }
 
+    // test class for the DayTest
+    [TestClass]
+    public class DayTest
+    {
+        [TestMethod]
+        public void DaySerializationTest()
+        {
+            Day day = new Day
+            {
+                MaxTempC = 28.5,
+                MinTempC = 18.5,
+                Condition = new Condition
+                {
+                    Text = "Partly cloudy",
+                    Icon = "https://example.com/partly-cloudy.png",
+                    Code = 801
+                },
+                AvgTempC = 23.5,
+                MaxWindKph = 15.0,
+                TotalPrecipIn = 0.5,
+                TotalSnowCm = 2.0,
+                AvgHumidity = 60.0,
+                DailyChanceOfRain = 30,
+                DailyChanceOfSnow = 10
+            };
+            string json = JsonConvert.SerializeObject(day);
+            Assert.IsNotNull(json);
+            Day deserializedDay = JsonConvert.DeserializeObject<Day>(json);
+            Assert.IsNotNull(deserializedDay);
+            Assert.AreEqual(28.5, deserializedDay.MaxTempC);
+            Assert.AreEqual(18.5, deserializedDay.MinTempC);
+            Assert.IsNotNull(deserializedDay.Condition);
+            Assert.AreEqual("Partly cloudy", deserializedDay.Condition.Text);
+            Assert.AreEqual("https://example.com/partly-cloudy.png", deserializedDay.Condition.Icon);
+            Assert.AreEqual(801, deserializedDay.Condition.Code);
+            Assert.AreEqual(23.5, deserializedDay.AvgTempC);
+            Assert.AreEqual(15.0, deserializedDay.MaxWindKph);
+            Assert.AreEqual(0.5, deserializedDay.TotalPrecipIn);
+            Assert.AreEqual(2.0, deserializedDay.TotalSnowCm);
+            Assert.AreEqual(60.0, deserializedDay.AvgHumidity);
+            Assert.AreEqual(30, deserializedDay.DailyChanceOfRain);
+            Assert.AreEqual(10, deserializedDay.DailyChanceOfSnow);
+        }
+    }
+
 }
