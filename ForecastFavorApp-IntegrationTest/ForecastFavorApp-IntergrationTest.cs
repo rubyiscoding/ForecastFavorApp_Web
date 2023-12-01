@@ -17,6 +17,7 @@ namespace ForecastFavorApp_IntegrationTest
             var opts = new ChromeOptions();
             _webDriver = new ChromeDriver(opts);
         }
+        //Asserting the title
         [TestMethod]
         public void Test()
         {
@@ -24,6 +25,7 @@ namespace ForecastFavorApp_IntegrationTest
             _webDriver.Navigate().GoToUrl(baseUrl);
             Assert.IsTrue(_webDriver.Title.Contains("ForecastFavorApp"), $"Expected title not found on {baseUrl}");
         }
+        //Asserting the today tab title
         [TestMethod]
         public void TodayTabTest()
         {
@@ -31,6 +33,15 @@ namespace ForecastFavorApp_IntegrationTest
             _webDriver.Navigate().GoToUrl(baseUrl);
             var todayTab = _webDriver.FindElement(By.CssSelector(".nav-item"));
             Assert.AreEqual("Today", todayTab.Text);
+        }
+        //Asserting the tomorrow tab title
+        [TestMethod]
+        public void TomorrowTabTest()
+        {
+            var baseUrl = "https://localhost:7293/";
+            _webDriver.Navigate().GoToUrl(baseUrl);
+            var tomorrowTab = _webDriver.FindElement(By.LinkText("Tomorrow"));
+            Assert.AreEqual("Tomorrow", tomorrowTab.Text);
         }
         [TestCleanup]
         public void Teardown()
