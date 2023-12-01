@@ -139,4 +139,83 @@ namespace ForecastFavorApp_UnitTest
         }
     }
 
+    // test class for the ForecastDayTest
+    [TestClass]
+    public class ForecastDayTest
+    {
+        [TestMethod]
+        public void ForecastDaySerializationTest()
+        {
+            ForecastDay forecastDay = new ForecastDay
+            {
+                Date = "2023-12-01",
+                Day = new Day
+                {
+                    MaxTempC = 28.5,
+                    MinTempC = 18.5,
+                    Condition = new Condition
+                    {
+                        Text = "Partly cloudy",
+                        Icon = "https://example.com/partly-cloudy.png",
+                        Code = 801
+                    },
+                    AvgTempC = 23.5,
+                    MaxWindKph = 15.0,
+                    TotalPrecipIn = 0.5,
+                    TotalSnowCm = 2.0,
+                    AvgHumidity = 60.0,
+                    DailyChanceOfRain = 30,
+                    DailyChanceOfSnow = 10
+                },
+                HourlyForecasts = new List<Hour>
+                {
+                    new Hour
+                    {
+                        Time = "12:00",
+                        TempC = 25.0,
+                        TempF = 77.0,
+                        Condition = new Condition
+                        {
+                            Text = "Clear",
+                            Icon = "https://example.com/clear.png",
+                            Code = 800
+                        },
+                        WindKph = 10.0
+                    },
+                }
+            };
+            string json = JsonConvert.SerializeObject(forecastDay);
+            Assert.IsNotNull(json);
+            ForecastDay deserializedForecastDay = JsonConvert.DeserializeObject<ForecastDay>(json);
+            Assert.IsNotNull(deserializedForecastDay);
+            Assert.AreEqual("2023-12-01", deserializedForecastDay.Date);
+            Assert.IsNotNull(deserializedForecastDay.Day);
+            Assert.AreEqual(28.5, deserializedForecastDay.Day.MaxTempC);
+            Assert.AreEqual(18.5, deserializedForecastDay.Day.MinTempC);
+            Assert.IsNotNull(deserializedForecastDay.Day.Condition);
+            Assert.AreEqual("Partly cloudy", deserializedForecastDay.Day.Condition.Text);
+            Assert.AreEqual("https://example.com/partly-cloudy.png", deserializedForecastDay.Day.Condition.Icon);
+            Assert.AreEqual(801, deserializedForecastDay.Day.Condition.Code);
+            Assert.AreEqual(23.5, deserializedForecastDay.Day.AvgTempC);
+            Assert.AreEqual(15.0, deserializedForecastDay.Day.MaxWindKph);
+            Assert.AreEqual(0.5, deserializedForecastDay.Day.TotalPrecipIn);
+            Assert.AreEqual(2.0, deserializedForecastDay.Day.TotalSnowCm);
+            Assert.AreEqual(60.0, deserializedForecastDay.Day.AvgHumidity);
+            Assert.AreEqual(30, deserializedForecastDay.Day.DailyChanceOfRain);
+            Assert.AreEqual(10, deserializedForecastDay.Day.DailyChanceOfSnow);
+            Assert.IsNotNull(deserializedForecastDay.HourlyForecasts);
+            Assert.AreEqual(1, deserializedForecastDay.HourlyForecasts.Count);
+            Hour deserializedHour = deserializedForecastDay.HourlyForecasts[0];
+            Assert.IsNotNull(deserializedHour);
+            Assert.AreEqual("12:00", deserializedHour.Time);
+            Assert.AreEqual(25.0, deserializedHour.TempC);
+            Assert.AreEqual(77.0, deserializedHour.TempF);
+            Assert.IsNotNull(deserializedHour.Condition);
+            Assert.AreEqual("Clear", deserializedHour.Condition.Text);
+            Assert.AreEqual("https://example.com/clear.png", deserializedHour.Condition.Icon);
+            Assert.AreEqual(800, deserializedHour.Condition.Code);
+            Assert.AreEqual(10.0, deserializedHour.WindKph);
+        }
+    }
+
 }
