@@ -320,4 +320,52 @@ namespace ForecastFavorApp_UnitTest
             Assert.AreEqual(1, deserializedForecastResponse.Forecast.ForecastDay.Count);
         }
     }
+    // test class for Hour
+    [TestClass]
+    public class HourTest
+    {
+        [TestMethod]
+        public void HourSerializationTest()
+        {
+            Hour hour = new Hour
+            {
+                TimeEpoch = 1638379200,
+                Time = "2023-12-01 12:00:00",
+                TempC = 25.0,
+                TempF = 77.0,
+                Condition = new Condition
+                {
+                    Text = "Clear",
+                    Icon = "https://example.com/clear.png",
+                    Code = 800
+                },
+                WindMph = 5.0,
+                WindKph = 8.0,
+                WindDegree = 180,
+                WindDir = "S",
+                PressureIn = 29.92,
+                PrecipIn = 0.0,
+                Humidity = 50,
+                Cloud = 10,
+                FeelsLikeC = 26.0,
+                WindChillC = 24.0,
+                HeatIndexC = 27.0,
+                DewPointC = 15.0,
+                WillItRain = 0,
+                ChanceOfRain = 0,
+                WillItSnow = 0,
+                ChanceOfSnow = 0,
+                Uv = 5.0
+            };
+            string json = JsonConvert.SerializeObject(hour);
+            Assert.IsNotNull(json);
+            Hour deserializedHour = JsonConvert.DeserializeObject<Hour>(json);
+            Assert.IsNotNull(deserializedHour);
+            Assert.AreEqual("2023-12-01 12:00:00", deserializedHour.Time);
+            Assert.IsNotNull(deserializedHour.Condition);
+            Assert.AreEqual("Clear", deserializedHour.Condition.Text);
+            Assert.AreEqual("https://example.com/clear.png", deserializedHour.Condition.Icon);
+            Assert.AreEqual(800, deserializedHour.Condition.Code);
+        }
+    }
 }
