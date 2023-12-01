@@ -3,6 +3,7 @@ using ForecastFavorLib.Models;
 
 namespace ForecastFavorApp_UnitTest
 {
+    // test class for the CurrentWeatherResponseTests
     [TestClass]
     public class ForecastFavorAppTest
     {
@@ -69,4 +70,28 @@ namespace ForecastFavorApp_UnitTest
             }
         }
     }
+
+    // test class for the ConditionTest
+    [TestClass]
+    public class ConditionTest
+    {
+        [TestMethod]
+        public void ConditionSerializationTest()
+        {
+            Condition condition = new Condition
+            {
+                Text = "Clear",
+                Icon = "https://example.com/clear.png",
+                Code = 800
+            };
+            string json = JsonConvert.SerializeObject(condition);
+            Assert.IsNotNull(json);
+            Condition deserializedCondition = JsonConvert.DeserializeObject<Condition>(json);
+            Assert.IsNotNull(deserializedCondition);
+            Assert.AreEqual("Clear", deserializedCondition.Text);
+            Assert.AreEqual("https://example.com/clear.png", deserializedCondition.Icon);
+            Assert.AreEqual(800, deserializedCondition.Code);
+        }
+    }
+
 }
