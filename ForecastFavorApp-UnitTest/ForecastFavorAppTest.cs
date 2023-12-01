@@ -368,4 +368,29 @@ namespace ForecastFavorApp_UnitTest
             Assert.AreEqual(800, deserializedHour.Condition.Code);
         }
     }
+    // test class for the location
+    [TestClass]
+    public class LocationTest
+    {
+        [TestMethod]
+        public void LocationSerializationTest()
+        {
+            Location location = new Location
+            {
+                Name = "City",
+                Region = "Region",
+                Country = "Country",
+                Latitude = 40.7128,
+                Longitude = -74.0060,
+                TimeZoneId = "America/New_York",
+                LocalTime = "2023-12-01 12:00:00"
+            };
+            string json = JsonConvert.SerializeObject(location);
+            Assert.IsNotNull(json);
+            Location deserializedLocation = JsonConvert.DeserializeObject<Location>(json);
+            Assert.IsNotNull(deserializedLocation);
+            Assert.AreEqual("City", deserializedLocation.Name);
+            Assert.AreEqual("America/New_York", deserializedLocation.TimeZoneId);
+        }
+    }
 }
