@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForecastFavorApp", "Forecas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForecastFavorLib", "ForecastFavorLib\ForecastFavorLib.csproj", "{0B0E7D83-1CBE-4738-B566-99C4A50B6504}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForecastFavorApp-UnitTest", "ForecastFavorApp-UnitTest\ForecastFavorApp-UnitTest.csproj", "{84FA255B-B40C-4B6D-BDFC-3A1167178FBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0B0E7D83-1CBE-4738-B566-99C4A50B6504}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B0E7D83-1CBE-4738-B566-99C4A50B6504}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B0E7D83-1CBE-4738-B566-99C4A50B6504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84FA255B-B40C-4B6D-BDFC-3A1167178FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84FA255B-B40C-4B6D-BDFC-3A1167178FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84FA255B-B40C-4B6D-BDFC-3A1167178FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84FA255B-B40C-4B6D-BDFC-3A1167178FBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
