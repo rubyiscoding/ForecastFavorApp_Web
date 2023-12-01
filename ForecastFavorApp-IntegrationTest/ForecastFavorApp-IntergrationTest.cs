@@ -24,6 +24,14 @@ namespace ForecastFavorApp_IntegrationTest
             _webDriver.Navigate().GoToUrl(baseUrl);
             Assert.IsTrue(_webDriver.Title.Contains("ForecastFavorApp"), $"Expected title not found on {baseUrl}");
         }
+        [TestMethod]
+        public void TodayTabTest()
+        {
+            var baseUrl = "https://localhost:7293/";
+            _webDriver.Navigate().GoToUrl(baseUrl);
+            var todayTab = _webDriver.FindElement(By.CssSelector(".nav-item"));
+            Assert.AreEqual("Today", todayTab.Text);
+        }
         [TestCleanup]
         public void Teardown()
         {
