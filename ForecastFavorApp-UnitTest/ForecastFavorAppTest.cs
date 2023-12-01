@@ -217,5 +217,107 @@ namespace ForecastFavorApp_UnitTest
             Assert.AreEqual(10.0, deserializedHour.WindKph);
         }
     }
-
+    // Test Class for ForcastResponse
+    [TestClass]
+    public class ForecastResponseTest
+    {
+        [TestMethod]
+        public void ForecastResponseSerializationTest()
+        {
+            ForecastResponse forecastResponse = new ForecastResponse
+            {
+                Location = new Location
+                {
+                    Name = "City",
+                    Region = "Region",
+                    Country = "Country",
+                    Latitude = 40.7128,
+                    Longitude = -74.0060,
+                    TimeZoneId = "America/New_York",
+                    LocalTime = "2023-12-01 12:00:00"
+                },
+                Current = new CurrentWeatherResponse
+                {
+                    Location = new Location
+                    {
+                        Name = "City",
+                        Region = "Region",
+                        Country = "Country",
+                        Latitude = 40.7128,
+                        Longitude = -74.0060,
+                        TimeZoneId = "America/New_York",
+                        LocalTime = "2023-12-01 12:00:00"
+                    },
+                    Current = new Current
+                    {
+                        LastUpdated = "2023-12-01 12:00:00",
+                        TemperatureC = 25.5,
+                        TemperatureF = 77.9,
+                        Condition = new Condition
+                        {
+                            Text = "Clear",
+                            Icon = "https://example.com/clear.png",
+                            Code = 800
+                        },
+                        PressureIn = 29.92,
+                        Humidity = 50,
+                        Cloud = 20,
+                        FeelsLikeC = 26.0,
+                        WindKph = 10.0
+                    }
+                },
+                Forecast = new Forecast
+                {
+                    ForecastDay = new List<ForecastDay>
+                    {
+                        new ForecastDay
+                        {
+                            Date = "2023-12-01",
+                            Day = new Day
+                            {
+                                MaxTempC = 28.5,
+                                MinTempC = 18.5,
+                                Condition = new Condition
+                                {
+                                    Text = "Partly cloudy",
+                                    Icon = "https://example.com/partly-cloudy.png",
+                                    Code = 801
+                                },
+                                AvgTempC = 23.5,
+                                MaxWindKph = 15.0,
+                                TotalPrecipIn = 0.5,
+                                TotalSnowCm = 2.0,
+                                AvgHumidity = 60.0,
+                                DailyChanceOfRain = 30,
+                                DailyChanceOfSnow = 10
+                            },
+                            HourlyForecasts = new List<Hour>
+                            {
+                                new Hour
+                                {
+                                    Time = "12:00",
+                                    TempC = 25.0,
+                                    TempF = 77.0,
+                                    Condition = new Condition
+                                    {
+                                        Text = "Clear",
+                                        Icon = "https://example.com/clear.png",
+                                        Code = 800
+                                    },
+                                    WindKph = 10.0
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            string json = JsonConvert.SerializeObject(forecastResponse);
+            ForecastResponse deserializedForecastResponse = JsonConvert.DeserializeObject<ForecastResponse>(json);
+            Assert.AreEqual("City", deserializedForecastResponse.Location.Name);
+            Assert.IsNotNull(deserializedForecastResponse.Current);
+            Assert.IsNotNull(deserializedForecastResponse.Forecast);
+            Assert.IsNotNull(deserializedForecastResponse.Forecast.ForecastDay);
+            Assert.AreEqual(1, deserializedForecastResponse.Forecast.ForecastDay.Count);
+        }
+    }
 }
